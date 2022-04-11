@@ -1,8 +1,21 @@
 # .github/workflows/**main.yml**
+
+
 name: Django-app workflow
 
 on: [push]
-
+[flake8]
+ignore =
+    W503,
+    F811
+exclude =
+    tests/,
+    */migrations/,
+    venv/,
+    env/
+per-file-ignores =
+    */settings.py:E501
+max-complexity = 10 
 jobs:
   tests:
     # «Раннер» — создание изолированного окружения с последней версией Ubuntu 
@@ -33,15 +46,3 @@ jobs:
       run: |
         # запуск проверки проекта по flake8
         python -m flake8
-[flake8]
-ignore =
-    W503,
-    F811
-exclude =
-    tests/,
-    */migrations/,
-    venv/,
-    env/
-per-file-ignores =
-    */settings.py:E501
-max-complexity = 10 
